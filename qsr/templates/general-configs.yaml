@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.proxy.name }}
+data:
+  {{- range $key, $value := .Values.proxy.configs }}
+  {{ $key }}: {{ $value }}
+  {{- end }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.qsr_config.name }}
+data:
+  {{- range $key, $value := .Values.qsr_config.configs }}
+  {{ $key }}: '{{ $value }}'
+  {{- end }}
