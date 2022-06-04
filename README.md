@@ -11,7 +11,7 @@
 1. Control panel setup: ./control-panel.sh
 ### Worker node
 1. Go into directory: Installation/k3s
-1. Run script by providing worker node user name and ip address: ./worker.sh <USER> <IP address>
+1. Run script by providing worker node user name and ip address: ./worker.sh \<USER\> \<IP address\>
 
 ## Mosquitto
 1. Deployment: helm install --create-namespace -n mqtt mosquitto mosquitto
