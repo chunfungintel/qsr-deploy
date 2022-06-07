@@ -1,0 +1,57 @@
+#  Copyright (C) 2021 Intel Corporation
+#  SPDX-License-Identifier: BSD-3-Clause
+apiVersion: v1
+kind: Service
+metadata:
+  name: asr
+  labels:
+    app: asr
+spec:
+  type: NodePort
+  ports:
+    - name: asr-port
+      port: 50051
+      targetPort: 50051
+      nodePort: 30008
+      protocol: TCP
+  selector:
+    app: asr
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: asr-server
+  labels:
+    app: asr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: asr
+  template:
+    metadata:
+      labels:
+        app: asr
+    spec:
+      containers:
+        - name: asr
+          image: 'amr-registry-pre.caas.intel.com/qsr/asr'
+          #image: 'asr:1.0'
+          imagePullPolicy: IfNotPresent
+          env:
+          - name: http_proxy
+            value: http://proxy.iind.intel.com:911
+          - name: https_proxy
+            value: http://proxy.iind.intel.com:911
+          ports:
+            - containerPort: 50051
+              name: asr-port
+              protocol: TCP
+          readinessProbe:
+            exec:
+              command: ["/home/asr/grpc_health_probe", "-addr=localhost:50051"]
+            initialDelaySeconds: 10
+          livenessProbe:
+            exec:
+              command: ["/home/asr/grpc_health_probe", "-addr=localhost:50051"]
+            initialDelaySeconds: 15

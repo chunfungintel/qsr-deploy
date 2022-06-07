@@ -13,5 +13,5 @@ metadata:
   name: {{ .Values.qsr_config.name }}
 data:
   {{- range $key, $value := .Values.qsr_config.configs }}
-  {{ $key }}: '{{ $value }}'
+  {{ $key }}: {{ $value | quote }}
   {{- end }}

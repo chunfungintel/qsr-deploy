@@ -1,0 +1,106 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: qsrbe
+  name: qsrbe-service
+  #namespace: default
+spec:
+  ports:
+  - port: 5000
+    protocol: TCP
+    targetPort: 5000
+    nodePort: 30050
+  selector:
+    app: qsrbe
+  #type: ClusterIP
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: qsr
+  name: qsrui-service
+  #namespace: default
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+    nodePort: 30080
+  selector:
+    app: qsr
+  #type: ClusterIP
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qsr
+  labels:
+    app: qsr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qsr
+  template:
+    metadata:
+      labels:
+        app: qsr
+    spec:
+      containers:
+      - name: qsr-ui
+        #image: amr-registry-pre.caas.intel.com/qsr/qsr-ui:cf-29052022
+        image: amr-registry-pre.caas.intel.com/qsr/qsr-ui:latest
+        ports:
+        - containerPort: 80
+        envFrom:
+        - configMapRef:
+            name: intel-proxy
+        - configMapRef:
+            name: qsr-config
+#      - name: qsr-be
+#        image: amr-registry-pre.caas.intel.com/qsr/qsr-be
+#        ports:
+#        - containerPort: 5000
+#        envFrom:
+#        - configMapRef:
+#            name: intel-proxy
+#        - configMapRef:
+#            name: qsr-config
+      - name: ubuntu-debug
+        image: gar-registry.caas.intel.com/virtiot/ubuntu:20.04-debug
+        envFrom:
+        - configMapRef:
+            name: intel-proxy
+        - configMapRef:
+            name: qsr-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qsrbe
+  labels:
+    app: qsrbe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qsrbe
+  template:
+    metadata:
+      labels:
+        app: qsrbe
+    spec:
+      containers:
+      - name: qsr-be
+        image: amr-registry-pre.caas.intel.com/qsr/qsr-be
+        ports:
+        - containerPort: 5000
+        envFrom:
+        - configMapRef:
+            name: intel-proxy
+        - configMapRef:
+            name: qsr-config
