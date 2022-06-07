@@ -1,4 +1,16 @@
 apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: qsrbe-pv-claim
+spec:
+  storageClassName: nfs-client
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+---
+apiVersion: v1
 kind: Service
 metadata:
   labels:
@@ -104,3 +116,10 @@ spec:
             name: intel-proxy
         - configMapRef:
             name: qsr-config
+        volumeMounts:
+        - name: qsrbe-persistent-storage
+          mountPath: /backend/assets/images
+      volumes:
+      - name: qsrbe-persistent-storage
+        persistentVolumeClaim:
+          claimName: qsrbe-pv-claim
