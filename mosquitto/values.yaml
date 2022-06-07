@@ -21,9 +21,11 @@ service:
       http:
         enabled: true
         port: 9001
+        nodePort: 30091
       mqtt:
         enabled: true
         port: 1883
+        nodePort: 31883
 
 auth:
   # -- By enabling this, `allow_anonymous` gets set to `false` in the mosquitto config.

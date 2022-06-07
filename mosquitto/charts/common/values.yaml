@@ -260,7 +260,8 @@ service:
     nameOverride:
 
     # -- Set the service type
-    type: ClusterIP
+    #type: ClusterIP
+    type: NodePort
 
     # -- Specify the externalTrafficPolicy for the service. Options: Cluster, Local
     # -- [[ref](https://kubernetes.io/docs/tutorials/services/source-ip/)]
