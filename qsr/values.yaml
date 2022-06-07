@@ -5,10 +5,6 @@
 replicaCount: 1
 
 
-#proxy:
-#  name: intel-proxy
-#  configs:
-#    TEST: TEST
 proxy:
   name: intel-proxy
   configs:
@@ -27,22 +23,15 @@ qsr_config:
   name: qsr-config
   configs:
     API_URL: 'http://10.226.76.247:30050'
-    #API_URL: 'http://qsrbe-service.qsr.svc.cluster.local:5000'
-    #API_URL: 'http://localhost:5000'
-    MQTT_HOST: 'mosquitto.mqtt.svc.cluster.local'
-    MQTT_PORT: "1883"
+    MQTT_HOST: '10.226.76.247'
+    MQTT_URL: 'ws://10.226.76.247:31883'
+    MQTT_PORT: "31883"
+    WS_PORT: "30091"
     MYSQL_HOST: "mysql.qsr.svc.cluster.local"
     MYSQL_PASSWORD: "test1234"
-    #MYSQL_HOST: 10.226.76.247
-    #MYSQL_PASSWORD: "1234"
     MYSQL_PORT: "3306"
     MYSQL_USER: root
-    WS_PORT: "9001"
-    #NAMESPACE: {{ tpl .Release.Namespace . | toJson | quote }}
-    #NAMESPACE: {{ tpl (.Release.Namespace | toYaml) . | quote }}
 
-#test:
-#  configs: {{ tpl (.Release.Namespace | toYaml) . | quote }}
 
 
 image:
