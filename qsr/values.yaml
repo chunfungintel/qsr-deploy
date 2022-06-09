@@ -32,6 +32,14 @@ qsr_config:
     MYSQL_PORT: "3306"
     MYSQL_USER: root
 
+asr_config:
+  name: asr-config
+  configs:
+    audio_ingestion_host: "localhost:50054"
+    asr_host: "localhost:50051"
+    plugin_type: "MQTT"
+    plugin_host: "localhost"
+    plugin_port: "1883"
 
 
 image:

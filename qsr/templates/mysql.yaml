@@ -78,29 +78,29 @@ spec:
   - port: 3306
   selector:
     app: mysql
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: mysqltest
-spec:
-  selector:
-    matchLabels:
-      app: mysqltest
-  strategy:
-    type: Recreate
-  template:
-    metadata:
-      labels:
-        app: mysqltest
-    spec:
-      containers:
-      - image: mysql:latest
-      #- image: mysql:5.6
-        name: mysql
-        env:
-        - name: MYSQL_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mysql-secret
-              key: password
+#---
+#apiVersion: apps/v1
+#kind: Deployment
+#metadata:
+#  name: mysqltest
+#spec:
+#  selector:
+#    matchLabels:
+#      app: mysqltest
+#  strategy:
+#    type: Recreate
+#  template:
+#    metadata:
+#      labels:
+#        app: mysqltest
+#    spec:
+#      containers:
+#      - image: mysql:latest
+#      #- image: mysql:5.6
+#        name: mysql
+#        env:
+#        - name: MYSQL_ROOT_PASSWORD
+#          valueFrom:
+#            secretKeyRef:
+#              name: mysql-secret
+#              key: password

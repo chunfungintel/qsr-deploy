@@ -15,3 +15,12 @@ data:
   {{- range $key, $value := .Values.qsr_config.configs }}
   {{ $key }}: {{ $value | quote }}
   {{- end }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.asr_config.name }}
+data:
+  {{- range $key, $value := .Values.asr_config.configs }}
+  {{ $key }}: {{ $value | quote }}
+  {{- end }}

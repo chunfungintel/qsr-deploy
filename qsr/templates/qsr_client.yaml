@@ -1,0 +1,66 @@
+# INTEL CONFIDENTIAL
+# Copyright (C) 2022 Intel Corporation
+# This software and the related documents are Intel copyrighted materials, 
+# and your use of them is governed by the express license under which they 
+# were provided to you ("License"). Unless the License provides otherwise, 
+# you may not use, modify, copy, publish, distribute, disclose or transmit 
+# this software or the related documents without Intel's prior written permission.
+# This software and the related documents are provided as is, with no express 
+# or implied warranties, other than those that are expressly stated in the License.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: qsr-client
+spec:
+  hostNetwork: true
+  volumes:
+    - name: device-vol
+      hostPath:
+        path: /run/user/1000/pulse/native
+    - name: cert-vol
+      hostPath:
+        path: /home/qsr_client/certificates/
+  securityContext:
+    runAsUser: 1000
+  containers:
+    - name: qsr-client
+      image: amr-registry-pre.caas.intel.com/qsr/qsr_client:1.0
+      imagePullPolicy: IfNotPresent
+      envFrom:
+      - configMapRef:
+          name: intel-proxy
+      - configMapRef:
+          name: qsr-config
+      - configMapRef:
+          name: asr-config
+      env:
+      - name: env
+        value: "dev"
+      - name: run_mode
+        value: "batch"
+      - name: sampling_rate
+        value: "16000"
+      - name: sample_width
+        value: "2"
+      - name: channel_num
+        value: "1"
+      - name: compression_type
+        value: "NONE"
+      - name: wake_word
+        value: "respeaker"
+      - name: max_record_time
+        value: "5"
+      - name: vad_timeout
+        value: "3"
+      - name: data_topic
+        value: "data_topic"
+      - name: notification_topic
+        value: "notify_topic"
+      - name: PULSE_SERVER
+        value: "unix:/run/user/1000/pulse/native"
+      volumeMounts:
+      - mountPath: /run/user/1000/pulse/native
+        name: device-vol
+      - mountPath: /home/qsr_client/client_certificates/
+        name: cert-vol

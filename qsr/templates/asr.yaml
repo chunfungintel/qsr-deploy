@@ -35,18 +35,17 @@ spec:
     spec:
       containers:
         - name: asr
-          image: 'amr-registry-pre.caas.intel.com/qsr/asr'
-          #image: 'asr:1.0'
+          image: 'amr-registry-pre.caas.intel.com/qsr/asr:1.0'
           imagePullPolicy: IfNotPresent
-          env:
-          - name: http_proxy
-            value: http://proxy.iind.intel.com:911
-          - name: https_proxy
-            value: http://proxy.iind.intel.com:911
           ports:
-            - containerPort: 50051
-              name: asr-port
-              protocol: TCP
+          - containerPort: 50051
+            name: asr-port
+            protocol: TCP
+          envFrom:
+          - configMapRef:
+              name: intel-proxy
+          - configMapRef:
+              name: qsr-config
           readinessProbe:
             exec:
               command: ["/home/asr/grpc_health_probe", "-addr=localhost:50051"]

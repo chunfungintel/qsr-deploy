@@ -16,7 +16,6 @@ metadata:
   labels:
     app: qsrbe
   name: qsrbe-service
-  #namespace: default
 spec:
   ports:
   - port: 5000
@@ -34,7 +33,6 @@ metadata:
   labels:
     app: qsr
   name: qsrui-service
-  #namespace: default
 spec:
   ports:
   - port: 80
@@ -64,7 +62,6 @@ spec:
     spec:
       containers:
       - name: qsr-ui
-        #image: amr-registry-pre.caas.intel.com/qsr/qsr-ui:cf-29052022
         image: amr-registry-pre.caas.intel.com/qsr/qsr-ui:latest
         ports:
         - containerPort: 80
@@ -73,15 +70,6 @@ spec:
             name: intel-proxy
         - configMapRef:
             name: qsr-config
-#      - name: qsr-be
-#        image: amr-registry-pre.caas.intel.com/qsr/qsr-be
-#        ports:
-#        - containerPort: 5000
-#        envFrom:
-#        - configMapRef:
-#            name: intel-proxy
-#        - configMapRef:
-#            name: qsr-config
       - name: ubuntu-debug
         image: gar-registry.caas.intel.com/virtiot/ubuntu:20.04-debug
         envFrom:
