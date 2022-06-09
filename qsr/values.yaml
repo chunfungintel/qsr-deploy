@@ -35,11 +35,11 @@ qsr_config:
 asr_config:
   name: asr-config
   configs:
-    audio_ingestion_host: "localhost:50054"
-    asr_host: "localhost:50051"
+    audio_ingestion_host: "10.226.76.247:30010"
+    asr_host: "10.226.76.247:30008"
     plugin_type: "MQTT"
-    plugin_host: "localhost"
-    plugin_port: "1883"
+    plugin_host: "10.226.76.247"
+    plugin_port: "31883"
 
 
 image:
