@@ -15,12 +15,12 @@ metadata:
   labels:
     app: audio-ingestion
 spec:
-  type: NodePort
+  #type: NodePort
   ports:
     - name: aud-port
       port: 50054
       targetPort: 50054
-      nodePort: 30010
+      #nodePort: 30010
       protocol: TCP
   selector:
     app: audio-ingestion
@@ -41,6 +41,15 @@ spec:
       labels:
         app: audio-ingestion
     spec:
+#      affinity:
+#        nodeAffinity:
+#          requiredDuringSchedulingIgnoredDuringExecution:
+#            nodeSelectorTerms:
+#            - matchExpressions:
+#              - key: mic
+#                operator: In
+#                values:
+#                - "yes"
       volumes:
       - name: device-vol
         hostPath:
@@ -63,6 +72,8 @@ spec:
           env:
           - name: env
             value: "dev"
+          #- name: run_mode
+          #  value: "wav"
           - name: run_mode
             value: "speech"
           - name: PYUSB_DEBUG_LEVEL

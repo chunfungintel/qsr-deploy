@@ -13,7 +13,16 @@ kind: Pod
 metadata:
   name: qsr-client
 spec:
-  hostNetwork: true
+  #hostNetwork: true
+#  affinity:
+#    nodeAffinity:
+#      requiredDuringSchedulingIgnoredDuringExecution:
+#        nodeSelectorTerms:
+#        - matchExpressions:
+#          - key: mic
+#            operator: In
+#            values:
+#            - "yes"
   volumes:
     - name: device-vol
       hostPath:
@@ -24,6 +33,15 @@ spec:
   securityContext:
     runAsUser: 1000
   containers:
+#    - name: ubuntu-debug
+#      image: gar-registry.caas.intel.com/virtiot/ubuntu:20.04-debug
+#      envFrom:
+#      - configMapRef:
+#          name: intel-proxy
+#      - configMapRef:
+#          name: qsr-config
+#      - configMapRef:
+#          name: asr-config
     - name: qsr-client
       image: amr-registry-pre.caas.intel.com/qsr/qsr_client:1.0
       imagePullPolicy: IfNotPresent

@@ -7,12 +7,12 @@ metadata:
   labels:
     app: asr
 spec:
-  type: NodePort
+  #type: NodePort
   ports:
     - name: asr-port
       port: 50051
       targetPort: 50051
-      nodePort: 30008
+      #nodePort: 30008
       protocol: TCP
   selector:
     app: asr
@@ -33,6 +33,15 @@ spec:
       labels:
         app: asr
     spec:
+#      affinity:
+#        nodeAffinity:
+#          requiredDuringSchedulingIgnoredDuringExecution:
+#            nodeSelectorTerms:
+#            - matchExpressions:
+#              - key: mic
+#                operator: In
+#                values:
+#                - "yes"
       containers:
         - name: asr
           image: 'amr-registry-pre.caas.intel.com/qsr/asr:1.0'
