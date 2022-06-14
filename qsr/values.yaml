@@ -8,7 +8,7 @@ replicaCount: 1
 qsr_images:
   audio_ingestion: amr-registry-pre.caas.intel.com/qsr/audio_ingestion:1.0
   asr: amr-registry-pre.caas.intel.com/qsr/asr:1.0
-  qsr_agent: amr-registry-pre.caas.intel.com/qsr/qsr_client:1.0
+  qsr_client: amr-registry-pre.caas.intel.com/qsr/qsr_client:1.0
   qsr_ui: amr-registry-pre.caas.intel.com/qsr/qsr-ui:latest
   qsr_be: amr-registry-pre.caas.intel.com/qsr/qsr-be
 
