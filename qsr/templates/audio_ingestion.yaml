@@ -81,11 +81,11 @@ spec:
               name: intel-proxy
           - configMapRef:
               name: qsr-config
+          - configMapRef:
+              name: asr-config
           env:
           - name: env
             value: "dev"
-          - name: run_mode
-            value: ''
           - name: PYUSB_DEBUG_LEVEL
             value: "debug"
           - name: PULSE_SERVER
