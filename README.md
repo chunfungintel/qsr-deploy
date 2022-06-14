@@ -27,3 +27,7 @@
 1. Deployment: helm install --create-namespace -n mqtt mosquitto mosquitto
 1. Upgrading: helm upgrade --install -n mqtt mosquitto mosquitto
 1. Delete: helm uninstall -n mqtt mosquitto
+
+## QSR deployment
+1. Create QSR stack: helm install --debug --create-namespace -n qsr qsr qsr
+1. Create database name "qsr" for mysql pods.
