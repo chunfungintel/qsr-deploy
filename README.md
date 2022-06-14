@@ -2,6 +2,7 @@
 
 ## Host setup
 1. Disable password asking: echo "$USER ALL=(ALL) NOPASSWD:ALL" | sudo EDITOR='tee -a' visudo
+1. NFS client installation: sudo apt install -y nfs-common
 
 ## Docker installation
 1. Go into directory: cd Installation/Docker
