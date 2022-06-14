@@ -43,7 +43,7 @@ spec:
 #      - configMapRef:
 #          name: asr-config
     - name: qsr-client
-      image: amr-registry-pre.caas.intel.com/qsr/qsr_client:1.0
+      image: {{ .Values.qsr_images.qsr_client | quote }}
       imagePullPolicy: IfNotPresent
       envFrom:
       - configMapRef:

@@ -62,7 +62,7 @@ spec:
     spec:
       containers:
       - name: qsr-ui
-        image: amr-registry-pre.caas.intel.com/qsr/qsr-ui:latest
+        image: {{ .Values.qsr_images.qsr_ui | quote }}
         ports:
         - containerPort: 80
         envFrom:
@@ -89,7 +89,7 @@ spec:
     spec:
       containers:
       - name: qsr-be
-        image: amr-registry-pre.caas.intel.com/qsr/qsr-be
+        image: {{ .Values.qsr_images.qsr_be | quote }}
         ports:
         - containerPort: 5000
         envFrom:

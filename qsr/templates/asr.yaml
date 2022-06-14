@@ -44,7 +44,7 @@ spec:
 #                - "yes"
       containers:
         - name: asr
-          image: 'amr-registry-pre.caas.intel.com/qsr/asr:1.0'
+          image: {{ .Values.qsr_images.asr | quote }}
           imagePullPolicy: IfNotPresent
           ports:
           - containerPort: 50051

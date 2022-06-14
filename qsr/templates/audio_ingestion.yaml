@@ -73,8 +73,8 @@ spec:
         hostPath:
           path: /home/audio_ingestion/certificates/
       containers:
-        - name: aud
-          image: 'amr-registry-pre.caas.intel.com/qsr/audio_ingestion:1.0'
+        - name: audio
+          image: {{ .Values.qsr_images.audio_ingestion | quote }}
           imagePullPolicy: IfNotPresent
           envFrom:
           - configMapRef:
