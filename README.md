@@ -1,5 +1,8 @@
 # QSR Deployment Guide
 
+## Host setup
+1. Disable password asking: echo "$USER ALL=(ALL) NOPASSWD:ALL" | sudo EDITOR='tee -a' visudo
+
 ## Docker installation
 1. Go into directory: cd Installation/Docker
 1. Docker installation: ./docker-install.sh
@@ -12,6 +15,12 @@
 ### Worker node
 1. Go into directory: Installation/k3s
 1. Run script by providing worker node user name and ip address: ./worker.sh \<USER\> \<IP address\>
+
+## NFS installation at control panel as k3s storage class
+1. Go into directory: Installation/nfs
+1. NFS installation: ./nfs.sh
+1. helm installation: ./helm.sh
+1. Install nfs helm chart: ./helm-nfs-storage.sh
 
 ## Mosquitto
 1. Deployment: helm install --create-namespace -n mqtt mosquitto mosquitto
