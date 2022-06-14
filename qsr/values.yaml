@@ -24,7 +24,7 @@ qsr_config:
   configs:
     API_URL: 'http://10.226.76.247:30050'
     MQTT_HOST: '10.226.76.247'
-    MQTT_URL: 'ws://10.226.76.247:31883'
+    MQTT_URL: 'ws://10.226.76.247:30091'
     MQTT_PORT: "31883"
     WS_PORT: "30091"
     MYSQL_HOST: "mysql.qsr.svc.cluster.local"
