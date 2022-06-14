@@ -5,6 +5,9 @@
 replicaCount: 1
 
 
+storageclass:
+  name: nfs-client
+
 proxy:
   name: intel-proxy
   configs:

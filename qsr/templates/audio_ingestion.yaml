@@ -9,6 +9,18 @@
 # or implied warranties, other than those that are expressly stated in the License.
 
 apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: audio-ingestion-pv-claim
+spec:
+  storageClassName: {{ .Values.storageclass.name }}
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
 kind: Service
 metadata:
   name: audio-ingestion
@@ -55,8 +67,8 @@ spec:
         hostPath:
           path: /run/user/1000/pulse/native
       - name: audio-vol
-        hostPath:
-          path: /home/audio_ingestion/audio_data_samples/
+        persistentVolumeClaim:
+          claimName: audio-ingestion-pv-claim
       - name: cert-vol
         hostPath:
           path: /home/audio_ingestion/certificates/
