@@ -6,3 +6,6 @@ mkdir -p $HOME/.kube && \
 sudo cp /etc/rancher/k3s/k3s.yaml $HOME/.kube/config && \
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
+sudo swapoff -a
+sudo sed -i 's/\/swapfile/#\/swapfile/' /etc/fstab
+

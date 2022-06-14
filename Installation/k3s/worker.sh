@@ -19,5 +19,6 @@ export TOKEN=`sudo cat /var/lib/rancher/k3s/server/node-token`
 echo "Provide worker ssh password then sudo password"
 export K3S_URL=https://${MASTER_IP}:6443
 export K3S_TOKEN=${TOKEN}
+ssh $WORKER_USER@$WORKER_IP "sudo swapoff -a && sudo sed -i 's/\/swapfile/#\/swapfile/' /etc/fstab"
 ssh $WORKER_USER@$WORKER_IP "curl -sfL https://get.k3s.io | K3S_URL=$K3S_URL K3S_TOKEN=$K3S_TOKEN sh -s - --kubelet-arg 'cgroup-driver=systemd' --docker"
 
