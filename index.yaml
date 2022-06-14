@@ -9,6 +9,6 @@ entries:
     name: qsr
     type: application
     urls:
-    - https://github.com/chunfungintel/qsr-deploy/tree/master/qsr-0.1.0.tgz
+    - https://chunfungintel.github.io/qsr-deploy/qsr-0.1.0.tgz
     version: 0.1.0
 generated: "2022-06-14T21:39:41.267454449+08:00"
