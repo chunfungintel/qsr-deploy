@@ -25,9 +25,9 @@ proxy:
 qsr_config:
   name: qsr-config
   configs:
-    API_URL: 'http://10.226.76.247:30050'
-    MQTT_HOST: '10.226.76.247'
-    MQTT_URL: 'ws://10.226.76.247:30091'
+    API_URL: 'http://MASTER_IP:30050'
+    MQTT_HOST: 'MASTER_IP'
+    MQTT_URL: 'ws://MASTER_IP:30091'
     MQTT_PORT: "31883"
     WS_PORT: "30091"
     MYSQL_HOST: "mysql.qsr.svc.cluster.local"
@@ -39,9 +39,11 @@ asr_config:
   name: asr-config
   configs:
     audio_ingestion_host: "audio-ingestion.qsr.svc.cluster.local:50054"
+    run_mode: "speech"
+    #run_mode: "wav"
     asr_host: "asr.qsr.svc.cluster.local:50051"
     plugin_type: "MQTT"
-    plugin_host: "10.226.76.247"
+    plugin_host: "MASTER_IP"
     plugin_port: "31883"
 
 

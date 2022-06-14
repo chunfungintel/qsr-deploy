@@ -29,5 +29,6 @@
 1. Delete: helm uninstall -n mqtt mosquitto
 
 ## QSR deployment
+1. Update MASTER\_IP in qsr/values.yaml: sed -i 's/MASTER\_IP/<MASTER IP ADDRESS>/g' qsr/values.yaml
 1. Create QSR stack: helm install --debug --create-namespace -n qsr qsr qsr
 1. Create database name "qsr" for mysql pods.

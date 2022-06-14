@@ -70,13 +70,6 @@ spec:
             name: intel-proxy
         - configMapRef:
             name: qsr-config
-      - name: ubuntu-debug
-        image: gar-registry.caas.intel.com/virtiot/ubuntu:20.04-debug
-        envFrom:
-        - configMapRef:
-            name: intel-proxy
-        - configMapRef:
-            name: qsr-config
 ---
 apiVersion: apps/v1
 kind: Deployment

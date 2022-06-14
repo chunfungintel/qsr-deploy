@@ -84,10 +84,8 @@ spec:
           env:
           - name: env
             value: "dev"
-          #- name: run_mode
-          #  value: "wav"
           - name: run_mode
-            value: "speech"
+            value: ''
           - name: PYUSB_DEBUG_LEVEL
             value: "debug"
           - name: PULSE_SERVER
