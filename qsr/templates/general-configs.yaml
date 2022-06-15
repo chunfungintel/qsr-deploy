@@ -3,24 +3,39 @@ kind: ConfigMap
 metadata:
   name: {{ .Values.proxy.name }}
 data:
-  {{- range $key, $value := .Values.proxy.configs }}
-  {{ $key }}: {{ $value }}
-  {{- end }}
+  FTP_PROXY: http://proxy-png.intel.com:911
+  HTTP_PROXY: http://proxy-png.intel.com:911
+  HTTPS_PROXY: http://proxy-png.intel.com:912
+  NO_PROXY: 10.0.0.0/8,192.168.0.0/16,localhost,.local,127.0.0.0/8,172.16.0.0/12,134.134.0.0/16,172.17.0.2/16
+  SOCKS_PROXY: http://proxy-png.intel.com:1080
+  ftp_proxy: http://proxy-png.intel.com:911
+  http_proxy: http://proxy-png.intel.com:911
+  https_proxy: http://proxy-png.intel.com:912
+  no_proxy: 10.0.0.0/8,192.168.0.0/16,localhost,.local,127.0.0.0/8,172.16.0.0/12,134.134.0.0/16,172.17.0.2/16
+  socks_proxy: http://proxy-png.intel.com:1080
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ .Values.qsr_config.name }}
 data:
-  {{- range $key, $value := .Values.qsr_config.configs }}
-  {{ $key }}: {{ $value | quote }}
-  {{- end }}
+  API_URL: http://{{ .Values.k3s_master.ip_addr }}:30050
+  MQTT_HOST: {{ .Values.k3s_master.ip_addr }}
+  MQTT_PORT: "31883"
+  MQTT_URL: ws://{{ .Values.k3s_master.ip_addr }}:30091
+  MYSQL_HOST: mysql.qsr.svc.cluster.local
+  MYSQL_PASSWORD: test1234
+  MYSQL_PORT: "3306"
+  MYSQL_USER: root
+  WS_PORT: "30091"
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ .Values.asr_config.name }}
 data:
-  {{- range $key, $value := .Values.asr_config.configs }}
-  {{ $key }}: {{ $value | quote }}
-  {{- end }}
+  asr_host: asr.qsr.svc.cluster.local:50051
+  audio_ingestion_host: audio-ingestion.qsr.svc.cluster.local:50054
+  plugin_host: {{ .Values.k3s_master.ip_addr }}
+  plugin_port: "31883"
+  plugin_type: MQTT

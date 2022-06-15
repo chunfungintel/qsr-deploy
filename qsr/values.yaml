@@ -4,6 +4,8 @@
 
 replicaCount: 1
 
+k3s_master:
+  ip_addr: 10.226.76.247
 
 qsr_images:
   audio_ingestion: amr-registry-pre.caas.intel.com/qsr/audio_ingestion:1.0
@@ -12,48 +14,14 @@ qsr_images:
   qsr_ui: amr-registry-pre.caas.intel.com/qsr/qsr-ui:latest
   qsr_be: amr-registry-pre.caas.intel.com/qsr/qsr-be
 
-
 storageclass:
   name: nfs-client
-
 proxy:
   name: intel-proxy
-  configs:
-    FTP_PROXY: http://proxy-png.intel.com:911
-    HTTP_PROXY: http://proxy-png.intel.com:911
-    HTTPS_PROXY: http://proxy-png.intel.com:912
-    NO_PROXY: 10.0.0.0/8,192.168.0.0/16,localhost,.local,127.0.0.0/8,172.16.0.0/12,134.134.0.0/16,172.17.0.2/16
-    SOCKS_PROXY: http://proxy-png.intel.com:1080
-    ftp_proxy: http://proxy-png.intel.com:911
-    http_proxy: http://proxy-png.intel.com:911
-    https_proxy: http://proxy-png.intel.com:912
-    no_proxy: 10.0.0.0/8,192.168.0.0/16,localhost,.local,127.0.0.0/8,172.16.0.0/12,134.134.0.0/16,172.17.0.2/16
-    socks_proxy: http://proxy-png.intel.com:1080
-
 qsr_config:
   name: qsr-config
-  configs:
-    API_URL: 'http://MASTER_IP:30050'
-    MQTT_HOST: 'MASTER_IP'
-    MQTT_URL: 'ws://MASTER_IP:30091'
-    MQTT_PORT: "31883"
-    WS_PORT: "30091"
-    MYSQL_HOST: "mysql.qsr.svc.cluster.local"
-    MYSQL_PASSWORD: "test1234"
-    MYSQL_PORT: "3306"
-    MYSQL_USER: root
-
 asr_config:
   name: asr-config
-  configs:
-    audio_ingestion_host: "audio-ingestion.qsr.svc.cluster.local:50054"
-    run_mode: "speech"
-    #run_mode: "wav"
-    asr_host: "asr.qsr.svc.cluster.local:50051"
-    plugin_type: "MQTT"
-    plugin_host: "MASTER_IP"
-    plugin_port: "31883"
-
 
 image:
   repository: nginx
