@@ -22,6 +22,9 @@ qsr_config:
   name: qsr-config
 asr_config:
   name: asr-config
+  config:
+    run_mode: "speech"
+    #run_mode: "wav"
 
 image:
   repository: nginx

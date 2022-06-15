@@ -39,3 +39,4 @@ data:
   plugin_host: {{ .Values.k3s_master.ip_addr }}
   plugin_port: "31883"
   plugin_type: MQTT
+  run_mode: {{ .Values.asr_config.config.run_mode | quote }}
