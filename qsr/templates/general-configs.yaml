@@ -40,3 +40,10 @@ data:
   plugin_port: "31883"
   plugin_type: MQTT
   run_mode: {{ .Values.asr_config.config.run_mode | quote }}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Values.qsr_secret.name }}
+data:
+  MYSQL_PASSWORD: {{ default "test1234" .Values.qsr_secret.config.mysql | b64enc | quote }}

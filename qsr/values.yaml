@@ -26,6 +26,12 @@ asr_config:
     run_mode: "speech"
     #run_mode: "wav"
 
+qsr_secret:
+  name: qsr-secret
+  config:
+    mysql: "test1234"
+
+
 image:
   repository: nginx
   pullPolicy: IfNotPresent
