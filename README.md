@@ -12,7 +12,7 @@
 ## k3s installation
 ### Control panel node
 1. Go into directory: Installation/k3s
-1. Control panel setup: ./control-panel.sh
+1. Control panel setup: ./control-plane.sh
 ### Worker node
 1. Go into directory: Installation/k3s
 1. Run script by providing worker node user name and ip address: ./worker.sh \<USER\> \<IP address\>
