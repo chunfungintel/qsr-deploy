@@ -37,21 +37,21 @@ spec:
 #      image: gar-registry.caas.intel.com/virtiot/ubuntu:20.04-debug
 #      envFrom:
 #      - configMapRef:
-#          name: intel-proxy
+#          name: {{ .Values.proxy.name }}
 #      - configMapRef:
-#          name: qsr-config
+#          name: {{ .Values.qsr_config.name }}
 #      - configMapRef:
-#          name: asr-config
+#          name: {{ .Values.asr_config.name }}
     - name: qsr-client
       image: {{ .Values.qsr_images.qsr_client | quote }}
       imagePullPolicy: IfNotPresent
       envFrom:
       - configMapRef:
-          name: intel-proxy
+          name: {{ .Values.proxy.name }}
       - configMapRef:
-          name: qsr-config
+          name: {{ .Values.qsr_config.name }}
       - configMapRef:
-          name: asr-config
+          name: {{ .Values.asr_config.name }}
       env:
       - name: env
         value: "dev"

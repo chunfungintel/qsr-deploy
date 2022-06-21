@@ -67,9 +67,9 @@ spec:
         - containerPort: 80
         envFrom:
         - configMapRef:
-            name: intel-proxy
+            name: {{ .Values.proxy.name }}
         - configMapRef:
-            name: qsr-config
+            name: {{ .Values.qsr_config.name }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -94,9 +94,9 @@ spec:
         - containerPort: 5000
         envFrom:
         - configMapRef:
-            name: intel-proxy
+            name: {{ .Values.proxy.name }}
         - configMapRef:
-            name: qsr-config
+            name: {{ .Values.qsr_config.name }}
         volumeMounts:
         - name: qsrbe-persistent-storage
           mountPath: /backend/assets/images

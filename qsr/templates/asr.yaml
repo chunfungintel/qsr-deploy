@@ -52,9 +52,9 @@ spec:
             protocol: TCP
           envFrom:
           - configMapRef:
-              name: intel-proxy
+              name: {{ .Values.proxy.name }}
           - configMapRef:
-              name: qsr-config
+              name: {{ .Values.qsr_config.name }}
           readinessProbe:
             exec:
               command: ["/home/asr/grpc_health_probe", "-addr=localhost:50051"]

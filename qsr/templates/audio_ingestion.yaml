@@ -78,11 +78,11 @@ spec:
           imagePullPolicy: IfNotPresent
           envFrom:
           - configMapRef:
-              name: intel-proxy
+              name: {{ .Values.proxy.name }}
           - configMapRef:
-              name: qsr-config
+              name: {{ .Values.qsr_config.name }}
           - configMapRef:
-              name: asr-config
+              name: {{ .Values.asr_config.name }}
           env:
           - name: env
             value: "dev"

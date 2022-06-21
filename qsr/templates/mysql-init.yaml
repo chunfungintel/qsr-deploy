@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: mysql-init
-data:
-  schema.sql: |-
-{{ .Files.Get "config/schema.sql" | nindent 4 }}
