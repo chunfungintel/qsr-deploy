@@ -28,11 +28,12 @@
 1. Upgrading: helm upgrade --install -n mqtt mosquitto mosquitto
 1. Delete: helm uninstall -n mqtt mosquitto
 
+## Portainer Agent
+1. Create portainer agent: curl -L https://downloads.portainer.io/ce2-13/portainer-agent-k8s-nodeport.yaml -o portainer-agent-k8s.yaml; kubectl apply -f portainer-agent-k8s.yaml
+
 ## QSR deployment
-1. Update MASTER\_IP in qsr/values.yaml: sed -i 's/MASTER\_IP/\<MASTER IP ADDRESS\>/g' qsr/values.yaml
+1. Update ip\_addr in qsr/values.yaml with address of cluster's master
 1. Create QSR stack: helm install --debug --create-namespace -n qsr qsr qsr
 1. Create database name "qsr" for mysql pods.
 
-## Portainer Agent
-1. Create portainer agent: curl -L https://downloads.portainer.io/ce2-13/portainer-agent-k8s-nodeport.yaml -o portainer-agent-k8s.yaml; kubectl apply -f portainer-agent-k8s.yaml
 
