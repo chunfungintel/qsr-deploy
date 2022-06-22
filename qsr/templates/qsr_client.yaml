@@ -8,19 +8,11 @@
 # This software and the related documents are provided as is, with no express 
 # or implied warranties, other than those that are expressly stated in the License.
 
-apiVersion: batch/v1
-kind: Job
+apiVersion: v1
+kind: Pod
 metadata:
-  name: qsr-client
-  #annotations:
-    #"helm.sh/hook": post-install
-    #"helm.sh/hook-weight": "-5"
-    #"helm.sh/hook-delete-policy": hook-succeeded
+  name: qsr-client-{{ randAlphaNum 5 | lower }}
 spec:
-  ttlSecondsAfterFinished: 100
-  template:
-    spec:
-      restartPolicy: Never
   #hostNetwork: true
 #  affinity:
 #    nodeAffinity:
@@ -31,48 +23,62 @@ spec:
 #            operator: In
 #            values:
 #            - "yes"
-      volumes:
-        - name: device-vol
-          hostPath:
-            path: /run/user/1000/pulse/native
-      securityContext:
-        runAsUser: 1000
-      containers:
-        - name: qsr-client
-          image: {{ .Values.qsr_images.qsr_client | quote }}
-          imagePullPolicy: IfNotPresent
-          envFrom:
-          - configMapRef:
-              name: {{ .Values.proxy.name }}
-          - configMapRef:
-              name: {{ .Values.qsr_config.name }}
-          - configMapRef:
-              name: {{ .Values.asr_config.name }}
-          env:
-          - name: env
-            value: "dev"
-          - name: run_mode
-            value: "batch"
-          - name: sampling_rate
-            value: "16000"
-          - name: sample_width
-            value: "2"
-          - name: channel_num
-            value: "1"
-          - name: compression_type
-            value: "NONE"
-          - name: wake_word
-            value: "respeaker"
-          - name: max_record_time
-            value: "5"
-          - name: vad_timeout
-            value: "3"
-          - name: data_topic
-            value: "data_topic"
-          - name: notification_topic
-            value: "notify_topic"
-          - name: PULSE_SERVER
-            value: "unix:/run/user/1000/pulse/native"
-          volumeMounts:
-          - mountPath: /run/user/1000/pulse/native
-            name: device-vol
+  volumes:
+    - name: device-vol
+      hostPath:
+        path: /run/user/1000/pulse/native
+    - name: cert-vol
+      hostPath:
+        path: /home/qsr_client/certificates/
+  securityContext:
+    runAsUser: 1000
+  containers:
+#    - name: ubuntu-debug
+#      image: gar-registry.caas.intel.com/virtiot/ubuntu:20.04-debug
+#      envFrom:
+#      - configMapRef:
+#          name: {{ .Values.proxy.name }}
+#      - configMapRef:
+#          name: {{ .Values.qsr_config.name }}
+#      - configMapRef:
+#          name: {{ .Values.asr_config.name }}
+    - name: qsr-client
+      image: {{ .Values.qsr_images.qsr_client | quote }}
+      imagePullPolicy: IfNotPresent
+      envFrom:
+      - configMapRef:
+          name: {{ .Values.proxy.name }}
+      - configMapRef:
+          name: {{ .Values.qsr_config.name }}
+      - configMapRef:
+          name: {{ .Values.asr_config.name }}
+      env:
+      - name: env
+        value: "dev"
+      - name: run_mode
+        value: "batch"
+      - name: sampling_rate
+        value: "16000"
+      - name: sample_width
+        value: "2"
+      - name: channel_num
+        value: "1"
+      - name: compression_type
+        value: "NONE"
+      - name: wake_word
+        value: "respeaker"
+      - name: max_record_time
+        value: "5"
+      - name: vad_timeout
+        value: "3"
+      - name: data_topic
+        value: "data_topic"
+      - name: notification_topic
+        value: "notify_topic"
+      - name: PULSE_SERVER
+        value: "unix:/run/user/1000/pulse/native"
+      volumeMounts:
+      - mountPath: /run/user/1000/pulse/native
+        name: device-vol
+      - mountPath: /home/qsr_client/client_certificates/
+        name: cert-vol
