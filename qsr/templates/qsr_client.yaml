@@ -43,6 +43,16 @@ spec:
             path: /home/qsr_client/certificates/
       securityContext:
         runAsUser: 1000
+      initContainers:
+      #During this Pod's initialization, check that myconfig service is up and running before starting this pod
+      - name: asr-ready
+        image: busybox:latest
+        command: ['sh', '-c',
+          'until nc -vz asr.{{ .Release.Namespace }}.svc.cluster.local 50051; do echo "Waiting for asr service"; sleep 2; done;']
+      - name: audio-ready
+        image: busybox:latest
+        command: ['sh', '-c',
+          'until nc -vz audio-ingestion.{{ .Release.Namespace }}.svc.cluster.local 50054; do echo "Waiting for audio service"; sleep 2; done;']
       containers:
         - name: qsr-client
           image: {{ .Values.qsr_images.qsr_client | quote }}
