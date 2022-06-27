@@ -1,0 +1,11 @@
+---
+- name: proxy settings
+  stat:
+    path: /dev/dri
+  register: dri
+- debug:
+    msg: "/dev/dri exists"
+  when: dri.stat.exists
+- debug:
+    msg: "/dev/dri not exist"
+  when: not dri.stat.exists

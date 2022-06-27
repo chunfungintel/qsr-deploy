@@ -1,0 +1,21 @@
+[control-plane]
+ubuntu00 ansible_host=<IP Address>
+
+[control-plane:vars]
+ansible_connection=ssh
+ansible_user=<USER NAME>
+ansible_ssh_pass=<PASSWORD>
+ansible_port=22
+ansible_sudo_pass=<PASSWORD>
+ansible_ssh_common_args="-o StrictHostKeyChecking=no -o GlobalKnownHostsFile=/dev/null -o UserKnownHostsFile=/dev/null"
+
+[worker]
+ubuntu01 ansible_host=<IP Address>
+
+[worker:vars]
+ansible_connection=ssh
+ansible_user=<USER NAME>
+ansible_ssh_pass=<PASSWORD>
+ansible_port=22
+ansible_sudo_pass=<PASSWORD>
+ansible_ssh_common_args="-o StrictHostKeyChecking=no -o GlobalKnownHostsFile=/dev/null -o UserKnownHostsFile=/dev/null"
