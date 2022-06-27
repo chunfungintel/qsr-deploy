@@ -1,4 +1,4 @@
-- name: Run a script with arguments (free form)
+- name: 'Run a script: {{ bash_script }}'
   become: yes
   register: script
   script: '{{ script_folder }}/{{ bash_script }}'
