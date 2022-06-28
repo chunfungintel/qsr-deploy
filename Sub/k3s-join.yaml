@@ -2,3 +2,10 @@
     var: hostvars[groups['control-plane'][0]]['K3S_JOIN_TOKEN']
 - debug:
     var: hostvars[groups['control-plane'][0]]['ansible_default_ipv4']['address']
+- name: 'k3s join script'
+  become: yes
+  register: script
+  script:
+    cmd: "{{ script_folder }}/k3s/worker_ansible.sh {{ hostvars[groups['control-plane'][0]]['ansible_default_ipv4']['address'] }} {{ hostvars[groups['control-plane'][0]]['K3S_JOIN_TOKEN'] }}"
+- debug: msg="{{ script.stdout_lines }}"
+- debug: msg="{{ script.stderr_lines }}"
