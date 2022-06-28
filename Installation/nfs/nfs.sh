@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FILE_PATH=/local/nfs
+FILE_PATH=${1:-/local/nfs}
 
 sudo apt update
 sudo apt install nfs-kernel-server
