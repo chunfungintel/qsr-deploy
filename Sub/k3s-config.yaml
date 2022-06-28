@@ -1,0 +1,8 @@
+- name: Set k3s config
+  become: yes
+  register: sudo_test
+  file:
+    path: /etc/rancher/k3s/k3s.yaml
+    mode: 'a+r'
+- debug:
+    var: sudo_test

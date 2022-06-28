@@ -1,0 +1,15 @@
+- name: helm install
+  hosts: local-machine
+  become_method: sudo
+  vars:
+    playbookfolder: '/Linux'
+  tasks:
+    - include_tasks: '{{ playbookfolder }}/run-scripts.yaml'
+      vars:
+        bash_script: 'nfs/helm.sh'
+- name: k3s kubeconfig
+  hosts: control-plane
+  vars:
+    playbookfolder: '/Linux'
+  tasks:
+    - include_tasks: '{{ playbookfolder }}/k3s-config.yaml'
