@@ -1,0 +1,4 @@
+- debug:
+    var: hostvars[groups['control-plane'][0]]['K3S_JOIN_TOKEN']
+- debug:
+    var: hostvars[groups['control-plane'][0]]['ansible_default_ipv4']['address']

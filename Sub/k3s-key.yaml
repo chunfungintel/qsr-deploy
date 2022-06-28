@@ -1,0 +1,15 @@
+- name: Get k3s password
+  become: yes
+  register: sudo_test
+  shell: |
+    sudo cat /var/lib/rancher/k3s/server/node-token
+  args:
+    executable: /bin/bash
+- debug:
+    var: sudo_test
+- name: Store k3s key
+  run_once: true
+  set_fact:
+    K3S_JOIN_TOKEN: '{{ sudo_test.stdout | trim }}'
+- debug:
+    var: K3S_JOIN_TOKEN

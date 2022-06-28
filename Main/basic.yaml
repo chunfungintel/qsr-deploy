@@ -1,3 +1,13 @@
+- name: Control panel NFS install
+  hosts: control-plane
+  become_method: sudo
+  vars:
+    playbookfolder: '/Linux'
+    script_folder: ''
+  tasks:
+    - include_tasks: '{{ playbookfolder }}/run-scripts.yaml'
+      vars:
+        bash_script: 'nfs/nfs.sh'
 - name: script install
   hosts: all
   become_method: sudo
