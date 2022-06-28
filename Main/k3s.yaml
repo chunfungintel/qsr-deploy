@@ -1,0 +1,27 @@
+- name: Control plane installation
+  hosts: control-plane
+  become_method: sudo
+  vars:
+    playbookfolder: '/Linux'
+    script_folder: ''
+  tasks:
+    - include_tasks: '{{ playbookfolder }}/run-scripts.yaml'
+      vars:
+        bash_script: 'k3s/control-plane.sh'
+    - include_tasks: '{{ playbookfolder }}/k3s-key.yaml'
+- name: Showing hostvars
+  hosts: all
+  become_method: sudo
+  tasks:
+    - include_tasks: '{{ playbookfolder }}/hostvar.yaml'
+- name: script install
+  hosts: worker
+  become_method: sudo
+  vars:
+    playbookfolder: '/Linux'
+    script_folder: ''
+  tasks:
+    - include_tasks: '{{ playbookfolder }}/run-scripts.yaml'
+      vars:
+        bash_script: 'test.sh'
+    - include_tasks: '{{ playbookfolder }}/k3s-join.yaml'

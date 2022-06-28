@@ -1,0 +1,23 @@
+- name: Worker uninstallation
+  hosts: worker
+  become_method: sudo
+  vars:
+    playbookfolder: '/Linux'
+    script_folder: ''
+  tasks:
+    - include_tasks: '{{ playbookfolder }}/run-shell.yaml'
+      vars:
+        bash_script: '/usr/local/bin/k3s-agent-uninstall.sh'
+- name: Control plane uninstallation
+  hosts: control-plane
+  become_method: sudo
+  vars:
+    playbookfolder: '/Linux'
+    script_folder: ''
+  tasks:
+    - include_tasks: '{{ playbookfolder }}/run-shell.yaml'
+      vars:
+        bash_script: '/usr/local/bin/k3s-killall.sh'
+    - include_tasks: '{{ playbookfolder }}/run-shell.yaml'
+      vars:
+        bash_script: '/usr/local/bin/k3s-uninstall.sh'
