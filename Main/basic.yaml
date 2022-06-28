@@ -12,7 +12,7 @@
       vars:
         bash_script: 'nfs/helm.sh'
 - name: script install
-  hosts: all
+  hosts: control-plane,worker
   become_method: sudo
   vars:
     playbookfolder: '/Linux'
