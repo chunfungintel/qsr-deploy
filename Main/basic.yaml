@@ -18,6 +18,7 @@
     playbookfolder: '/Linux'
     script_folder: ''
   tasks:
+    - include_tasks: '{{ playbookfolder }}/install.yaml'
     - include_tasks: '{{ playbookfolder }}/run-scripts.yaml'
       vars:
         bash_script: 'nfs/nfs-common.sh'
@@ -27,3 +28,11 @@
     - include_tasks: '{{ playbookfolder }}/run-scripts.yaml'
       vars:
         bash_script: 'Docker/docker-configure.sh'
+- name: script install
+  hosts: local-machine
+  become_method: sudo
+  vars:
+    playbookfolder: '/Linux'
+    script_folder: ''
+  tasks:
+    - include_tasks: '{{ playbookfolder }}/install.yaml'

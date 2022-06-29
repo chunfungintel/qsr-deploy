@@ -1,0 +1,9 @@
+- name: 'Run a script: {{ bash_script }}'
+  become: yes
+  register: script
+  apt:
+    name: sshpass
+    state: present
+- debug: msg="{{ script.stdout_lines }}"
+- debug: msg="{{ script.stderr_lines }}"
+

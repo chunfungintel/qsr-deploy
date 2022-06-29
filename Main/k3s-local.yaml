@@ -8,8 +8,13 @@
       vars:
         bash_script: 'nfs/helm.sh'
 - name: k3s kubeconfig
-  hosts: control-plane
+  hosts: local-machine
   vars:
     playbookfolder: '/Linux'
   tasks:
     - include_tasks: '{{ playbookfolder }}/k3s-config.yaml'
+    - name: Tranfer control-plane k3s kubeconfig to local
+      synchronize:
+        src: /etc/rancher/k3s/k3s.yaml
+        dest: /home/{{ ansible_user }}/.kube/config
+      delegate_to: ubuntu00
