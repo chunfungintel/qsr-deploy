@@ -15,3 +15,6 @@
       #delegate_to: ubuntu00
       delegate_to: "{{ item }}"
       with_inventory_hostnames: control-plane
+    #- include_tasks: '{{ playbookfolder }}/hostvar.yaml'
+    #- local_action: copy content={{ hostvars }} dest=./hostvar
+    - include_tasks: '{{ playbookfolder }}/k3s-config-set.yaml'

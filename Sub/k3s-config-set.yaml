@@ -1,0 +1,8 @@
+- debug:
+    var: hostvars[hostvars[inventory_hostname]['groups']['control-plane'][0]]['ansible_host']
+- name: Replace https://localhost:6443 by https://control-plane-ip:6443
+  replace:
+    path: /home/{{ ansible_user }}/.kube/config
+    regexp: 'https://127.0.0.1:6443'
+    replace: "https://{{ hostvars[hostvars[inventory_hostname]['groups']['control-plane'][0]]['ansible_host'] }}:6443"
+    #replace: "https://{{ hostvars[hostvars['{{ inventory_hostname  }}']['groups']['control-plane'][0]]['ansible_host'] }}:6443"
