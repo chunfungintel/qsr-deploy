@@ -23,7 +23,7 @@ data:
   MQTT_HOST: {{ .Values.k3s_master.ip_addr }}
   MQTT_PORT: "31883"
   MQTT_URL: ws://{{ .Values.k3s_master.ip_addr }}:30091
-  MYSQL_HOST: mysql.qsr.svc.cluster.local
+  MYSQL_HOST: mysql.{{ .Release.Namespace }}.svc.cluster.local
   MYSQL_PASSWORD: test1234
   MYSQL_PORT: "3306"
   MYSQL_USER: root
@@ -34,8 +34,8 @@ kind: ConfigMap
 metadata:
   name: {{ .Values.asr_config.name }}
 data:
-  asr_host: asr.qsr.svc.cluster.local:50051
-  audio_ingestion_host: audio-ingestion.qsr.svc.cluster.local:50054
+  asr_host: asr.{{ .Release.Namespace }}.svc.cluster.local:50051
+  audio_ingestion_host: audio-ingestion.{{ .Release.Namespace }}.svc.cluster.local:50054
   plugin_host: {{ .Values.k3s_master.ip_addr }}
   plugin_port: "31883"
   plugin_type: MQTT
