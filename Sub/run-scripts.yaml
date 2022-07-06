@@ -1,3 +1,5 @@
+- debug:
+    var: script_folder
 - name: 'Run a script: {{ bash_script }}'
   become: yes
   register: script

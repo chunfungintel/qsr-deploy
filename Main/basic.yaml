@@ -11,7 +11,8 @@
     - include_tasks: '{{ playbookfolder }}/run-scripts.yaml'
       vars:
         bash_script: 'nfs/helm.sh'
-- name: script install
+    - include_tasks: '{{ playbookfolder }}/install.yaml'
+- name: Docker, nfs-common installation
   hosts: control-plane,worker
   become_method: sudo
   vars:
@@ -28,11 +29,3 @@
     - include_tasks: '{{ playbookfolder }}/run-scripts.yaml'
       vars:
         bash_script: 'Docker/docker-configure.sh'
-- name: script install
-  hosts: local-machine
-  become_method: sudo
-  vars:
-    playbookfolder: '/Linux'
-    script_folder: ''
-  tasks:
-    - include_tasks: '{{ playbookfolder }}/install.yaml'
