@@ -29,6 +29,11 @@ default:
 	@echo ${host_file}
 
 run:
+	ansible-playbook -i ${HOST_FILE} \
+	-e 'playbookfolder=${SUB_PLAYBOOK_PATH} script_folder=${SCRIPT_PATH}' \
+	${MAIN_PLAYBOOK_PATH}/${SCRIPT_FILE}
+
+run_docker:
 	docker run -it --rm \
 	-v ${HOST_FILE}:/host_all \
 	-v ${MAIN_PLAYBOOK_PATH}:${MAIN_PLAYBOOK_MOUNT} \

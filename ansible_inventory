@@ -11,6 +11,7 @@ ansible_ssh_common_args="-o StrictHostKeyChecking=no -o GlobalKnownHostsFile=/de
 
 [worker]
 ubuntu01 ansible_host=<IP Address>
+ubuntu02 ansible_host=<IP Address>
 
 [worker:vars]
 ansible_connection=ssh

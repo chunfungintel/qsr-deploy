@@ -8,6 +8,21 @@
 1. GNU make
 1. Create hosts inventory, refer to inventory.
 
+## Ansible Quick Introduction
+1. Ansible is popular open source device management tool.
+1. For Linux machine, its main connection to device is by using SSH.
+1. For ansible to doing its job, it will need playbooks which defined the desired tasks and inventory which contain device connection information.
+
+## Inventory Setup
+1. Inventory example provided in `ansible_inventory`
+1. It has two main groups of devices: control-plane and worker.
+1. Only 1 target is allowed in control-plane group, which will act as control-plane of k3s cluster.
+1. Multiple target is allowed in worker group, which will join as worker of the k3s cluster.
+1. Replace the information according:
+   - `ansible_user`: user name
+   - `ansible_ssh_pass`: SSH password
+   - `ansible_sudo_pass`: sudo password(user must be a sudoer)
+
 ## Host configuration
 1. make run SCRIPT\_FILE=basic.yaml HOST\_FILE=${PWD}/ansible\_inventory
 
