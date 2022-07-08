@@ -23,11 +23,16 @@
    - `ansible_ssh_pass`: SSH password
    - `ansible_sudo_pass`: sudo password(user must be a sudoer)
 
+## Quick Test
+1. To check if ansible and inventory created correctly, please try step below:
+   - `make run SCRIPT_FILE=test.yaml HOST_FILE=${PWD}/ansible_inventory`
+1. This command will trigger to run a ansible playbook test.yaml, to check for SSH connection and sudo right.
+
 ## Host configuration
-1. make run SCRIPT\_FILE=basic.yaml HOST\_FILE=${PWD}/ansible\_inventory
+1. `make run SCRIPT_FILE=basic.yaml HOST_FILE=${PWD}/ansible_inventory`
 
 ## K3S cluster formation
-1. make run SCRIPT\_FILE=k3s.yaml HOST\_FILE=${PWD}/ansible\_inventory
+1. `make run SCRIPT_FILE=k3s.yaml HOST_FILE=${PWD}/ansible_inventory`
 
 ## Services installation with helm
-1. make run SCRIPT\_FILE=helm.yaml HOST\_FILE=${PWD}/ansible\_inventory
+1. `make run SCRIPT_FILE=helm.yaml HOST_FILE=${PWD}/ansible_inventory`
