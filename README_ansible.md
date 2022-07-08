@@ -29,10 +29,21 @@
 1. This command will trigger to run a ansible playbook test.yaml, to check for SSH connection and sudo right.
 
 ## Host configuration
+1. This part mainly to do basic setup on hosts before installing k3s cluster.
+1. The setup including:
+   - Docker, sshpass and nfs-common installation
+   - For control-plane only: NFS server setup and helm installation
 1. `make run SCRIPT_FILE=basic.yaml HOST_FILE=${PWD}/ansible_inventory`
 
 ## K3S cluster formation
+1. This part will do k3s cluster formation.
 1. `make run SCRIPT_FILE=k3s.yaml HOST_FILE=${PWD}/ansible_inventory`
 
 ## Services installation with helm
-1. `make run SCRIPT_FILE=helm.yaml HOST_FILE=${PWD}/ansible_inventory`
+1. This will set NFS at k3s control-plane as the NFS backed storage class.
+1. `make run SCRIPT_FILE=nfs-storageclass.yaml HOST_FILE=${PWD}/ansible_inventory`
+
+## Uninstall
+1. Running command below will uninstall k3s cluster.
+1. `make run SCRIPT_FILE=k3s-uninstall.yaml HOST_FILE=${PWD}/ansible_inventory`
+

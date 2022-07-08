@@ -6,10 +6,4 @@
   tasks:
     - include_tasks: '{{ playbookfolder }}/run-scripts.yaml'
       vars:
-        bash_script: 'nfs/nfs.sh'
-    - include_tasks: '{{ playbookfolder }}/run-scripts.yaml'
-      vars:
-        bash_script: 'nfs/helm.sh'
-    - include_tasks: '{{ playbookfolder }}/run-scripts.yaml'
-      vars:
         bash_script: 'nfs/helm-nfs-storage.sh'

@@ -11,7 +11,6 @@
     - include_tasks: '{{ playbookfolder }}/run-scripts.yaml'
       vars:
         bash_script: 'nfs/helm.sh'
-    - include_tasks: '{{ playbookfolder }}/install.yaml'
 - name: Docker, nfs-common installation
   hosts: control-plane,worker
   become_method: sudo
