@@ -87,6 +87,12 @@ spec:
       labels:
         app: qsrbe
     spec:
+      initContainers:
+      #During this Pod's initialization, check that myconfig service is up and running before starting this pod
+      - name: asr-ready
+        image: busybox:latest
+        command: ['sh', '-c',
+          'until nc -vz mysql.{{ .Release.Namespace }}.svc.cluster.local 3306; do echo "Waiting for mysql service"; sleep 2; done;']
       containers:
       - name: qsr-be
         image: {{ .Values.qsr_images.qsr_be | quote }}
